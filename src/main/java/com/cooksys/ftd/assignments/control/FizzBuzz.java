@@ -1,6 +1,7 @@
 package com.cooksys.ftd.assignments.control;
 
-import com.cooksys.ftd.assignments.control.util.MissingImplementationException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -27,7 +28,10 @@ public class FizzBuzz {
      * @throws IllegalArgumentException if b is zero
      */
     public static boolean divides(int a, int b) throws IllegalArgumentException {
-        throw new MissingImplementationException();
+        if (b == 0) {
+            throw new IllegalArgumentException("cannot divide by 0");
+        }
+        return a % b == 0;
     }
 
     /**
@@ -42,7 +46,15 @@ public class FizzBuzz {
      * @return a message according to the format above, or null if n is not divisible by either 3 or 5
      */
     public static String message(int n) {
-        throw new MissingImplementationException();
+        if (divides(n, 3) && divides(n, 5)) {
+            return n + ": FizzBuzz";
+        } else if (divides(n, 3)) {
+            return n + ": Fizz";
+        } else if (divides(n, 5)) {
+            return n + ": Buzz";
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -56,7 +68,16 @@ public class FizzBuzz {
      * @throws IllegalArgumentException if the given end is less than the given start
      */
     public static String[] messages(int start, int end) throws IllegalArgumentException {
-        throw new MissingImplementationException();
+        if (start > end) {
+            throw new IllegalArgumentException("End is less than start");
+        }
+        List<String> list = new ArrayList<>();
+        for (int i = start; i < end; i++) {
+            if (message(i) != null) {
+                list.add(message(i));
+            }
+        }
+        return list.toArray(new String[0]);
     }
 
     /**
@@ -64,7 +85,6 @@ public class FizzBuzz {
      * the relevant messages to sysout
      */
     public static void main(String[] args) {
-        throw new MissingImplementationException();
+        messages(1, 116);
     }
-
 }
