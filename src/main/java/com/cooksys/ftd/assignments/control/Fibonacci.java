@@ -1,7 +1,5 @@
 package com.cooksys.ftd.assignments.control;
 
-import com.cooksys.ftd.assignments.control.util.MissingImplementationException;
-
 /**
  * The Fibonacci sequence is simply and recursively defined: the first two elements are `1`, and
  * every other element is equal to the sum of its two preceding elements. For example:
@@ -24,7 +22,20 @@ public class Fibonacci {
      * @throws IllegalArgumentException if the given index is less than zero
      */
     public static int atIndex(int i) throws IllegalArgumentException {
-        throw new MissingImplementationException();
+        if (i < 0) {
+            throw new IllegalArgumentException("Index can't be less than zero!");
+        }
+        if (i == 0 || i == 1) {
+            return 1;
+        }
+        int precVal = 1;
+        int currentVal = 1;
+        for (int ind = 2; ind <= i; ind++) {
+            int nextVal = precVal + currentVal;
+            precVal = currentVal;
+            currentVal = nextVal;
+        }
+        return currentVal;
     }
 
     /**
@@ -38,7 +49,15 @@ public class Fibonacci {
      *                                  given end is less than the given start
      */
     public static int[] slice(int start, int end) throws IllegalArgumentException {
-        throw new MissingImplementationException();
+        if (start < 0 || end < start) {
+            throw new IllegalArgumentException("Start can't be greater than end and can't have negative values");
+        }
+        int[] result = new int[end - start];
+
+        for (int i = start; i < end; i++) {
+            result[i - start] = atIndex(i);
+        }
+        return result;
     }
 
     /**
@@ -49,6 +68,14 @@ public class Fibonacci {
      * @throws IllegalArgumentException if the given count is negative
      */
     public static int[] fibonacci(int count) throws IllegalArgumentException {
-        throw new MissingImplementationException();
+        if (count < 0) {
+            throw new IllegalArgumentException("Count can't be negative");
+        }
+        int[] result = new int[count];
+
+        for (int i = 0; i < count; i++) {
+            result[i] = atIndex(i);
+        }
+        return result;
     }
 }
